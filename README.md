@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+## TodoList 만들기
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+CheckList(Y/N)
 
-## Available Scripts
+1. 나는 react-query의 staleTime과 cacheTime의 역할에 대하여 인지하고 있다.
+2. 나는 react-query의 mutate, mutateAsync, useQuery를 사용할 수 있다.
+3. 나는 reacy-query의 getQueryData와 setQueryData를 사용할 수 있다.
+4. 나는 react-query의 onMutate와 setQueryData를 활용하여 optimistic update를 할 수 있다.
+5. 나는 react-hook-form을 활용하여 form의 invalidate를 할 수 있다.
+6. 나는 axios의 instance를 생성하고, 인증 토큰과 리프레쉬 토큰을 통한 토큰 재발급을 할 수 있다.
 
-In the project directory, you can run:
+Requirements
 
-### `npm start`
+1. 가장 먼저 재사용 및 상태 최적화를 고려하여 폴더 구조를 고민하기
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 기존에 있던 수업자료는 다양한 학습 과정을 담기 위해 폴더 구조를 과장했어요!
+- 정말 필요에 따라 나누어 폴더 구조를 먼저 생각 해봐야해요 :)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. RHF와 yup을 활용하여 회원가입, 로그인을 구현해야해요 - email을 email 양식을 보여줘야해요!
 
-### `npm test`
+- password는 특수문자가 반드시 포함되어야해요!
+- 에러 메세지를 반드시 실시간으로 표시해줘야해요!
+- 유효성 검사가 되지 않았다면 버튼이 disabled 되어야해요!
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. react-query를 활용하여 캐싱 되어있는 것을 꼭 확인해야해요! - staleTime 값을 0이었을 때, 아니었을 떄를 설정해서 캐싱이 뭔지 확인해야해요!
 
-### `npm run build`
+- todo가 추가되었을 때 캐싱되어 데이터가 재호출되지 않는 것을 경험 해야하고 해소해야해요!
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. todo의 완료 상태를 바꿨을 때는 반드시 낙관적 업데이트(optimistic-update)를 해봐요
+5. access_token, refresh_token을 이용해서 인증 로직을 구현해야해요
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### API 분석하기
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+----- user -----
+status {401} - 인증 토큰 만료
+status {403} - 리프레쉬 토큰 만료
 
-### `npm run eject`
+회원가입
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- email,pw
+- 200: -- 축하합니다. 회원가입에 성공하셨습니다 --
+- 400: -- 이미 존재하는 이메일입니다 --
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+로그인
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- email,pw
+- 200: token: access_token
+- 400: -- 로그인에 실패하셨습니다 --
+  -- 가입되지 않은 회원입니다 --
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+로그아웃
 
-## Learn More
+----- todo -----
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+todolist
+title
+content
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+추가,수정,삭제
